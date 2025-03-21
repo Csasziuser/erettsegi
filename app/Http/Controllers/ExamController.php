@@ -58,4 +58,22 @@ class ExamController extends Controller
         }
         return response()->json($result, 200, options:JSON_UNESCAPED_UNICODE);
     }
+
+    public function destroy(Request $request) 
+
+    {
+     try {
+        $request -> validate([
+            "id" => "required|integer|exists:exams,id"
+        ]);
+        $exam = Exam::findOrFail($request->id);
+        if ($exam->delete()) {
+            return response()->json(["message"=>"Vizsga törölve"], 200, options:JSON_UNESCAPED_UNICODE);
+        } else {
+            return response()->json(["message"=>"Sikertelen törlés"], 500, options:JSON_UNESCAPED_UNICODE);
+        }
+     } catch (ValidationException $e) {
+        return response()->json(["message"=>$e->getMessage()], 400, options:JSON_UNESCAPED_UNICODE);
+     }
+    }
 }
