@@ -12,9 +12,9 @@ Route::get('/user', function (Request $request) {
 Route::get('/students',[StudentController::class,"index"])-> name("student.index");
 Route::post('/students',[StudentController::class,"store"])-> name("student.store");
 
-Route::get('/exam',[ExamController::class,"index"])-> name("exam.index");
-Route::post('/exam',[ExamController::class,"store"])-> name("exam.store");
+Route::get('/exams',[ExamController::class,"index"])-> name("exam.index");
+Route::post('/exams',[ExamController::class,"store"])-> name("exam.store");
 
-Route::delete('/exam',[ExamController::class,"destroy"])-> name("exam.destroy");
+Route::delete('/exams',[ExamController::class,"destroy"])-> name("exam.destroy");
 
 
