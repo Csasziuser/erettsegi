@@ -48,4 +48,14 @@ class ExamController extends Controller
 
         return response()->json(["Sikeresen felvitte az új terembeosztast!"], 418, options: JSON_UNESCAPED_UNICODE);
     }
+
+    public function index()
+    {
+        $exams = Exam::all();
+        $result =[];
+        foreach ($exams as $exam) {
+            array_push($result, ["student"=>$exam->student->student_name . ' - ' . $exam->student->class,"classroom"=> $exam->classroom,"subject"=>$exam->subject,"date"=>$exam->date,"id"=>$exam->id]);
+        }
+        return response()->json($result, 200, options:JSON_UNESCAPED_UNICODE);
+    }
 }
