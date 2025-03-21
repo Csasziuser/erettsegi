@@ -33,14 +33,14 @@ class StudentController extends Controller
     }
 
     public function index(){
-        $students = Student::all();
-        $strippedStudents =[];
-        foreach ($students as $s) {
-            array_push($strippedStudents, ["student_name"=>$s->student_name,"class"=> $s->class,"id"=>$s->id]);
-        }
-        
+        $students = Student::select("id","student_name","class")->get();
+        return response()->json(["students" => $students], 200, options:JSON_UNESCAPED_UNICODE);
 
-        return response()->json(["students" => $strippedStudents], 200, options:JSON_UNESCAPED_UNICODE);
+        // $strippedStudents =[];
+        // foreach ($students as $s) {
+        //     array_push($strippedStudents, ["student_name"=>$s->student_name,"class"=> $s->class,"id"=>$s->id]);
+        // }
+        // return response()->json(["students" => $strippedStudents], 200, options:JSON_UNESCAPED_UNICODE);
 
     }
         
